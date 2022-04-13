@@ -11,9 +11,5 @@
   <p>上传assets文件夹：<input id="fileFolder" name="fileFolder" type="file"  webkitdirectory> </p>
   <p><input type="submit" value="提交"><input type="reset" value="重置"></p>
 </form>
-<%--<form action="${pageContext.request.contextPath}/UploadFileFolderServlet" method="post" enctype="multipart/form-data">--%>
-<%--  <p>上传文件夹：<input id="fileFolder" name="fileFolder" type="file"  webkitdirectory> </p>--%>
-<%--  <p><input type="submit" value="提交"><input type="reset" value="重置"></p>--%>
-<%--</form>--%>
   </body>
 </html>
