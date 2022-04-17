@@ -79,8 +79,8 @@ public class UploadServlet extends HttpServlet {
     }
 
     private void outPutFileStream(MultipartFile file, String Path) throws IOException {
-        // 上传html文件
         InputStream inputStream = file.getInputStream();
+        // 判断是否是html文件
         if (Path.substring(Path.lastIndexOf(".") + 1).equals("html")) {
             inputStream = replaceUrl(inputStream);
         }
@@ -90,7 +90,6 @@ public class UploadServlet extends HttpServlet {
         while ((len = inputStream.read(buffer)) > 0) {
             outputStream.write(buffer,0,len);
         }
-
         outputStream.close();
         inputStream.close();
     }
@@ -103,8 +102,8 @@ public class UploadServlet extends HttpServlet {
             out.write(buffer,0,len);
         }
         String htmlContent = out.toString().replace("WCS", "HJJ");
-        System.out.println("文件原内容为：" + out.toString());
-        System.out.println("替换后的内容为："+htmlContent);
+//        System.out.println("文件原内容为：" + out.toString());    // 输出乱码
+//        System.out.println("替换后的内容为："+htmlContent);       // 输出乱码
         if (htmlContent.trim().equals("")) {
             System.out.println("文本内容为空");
         }
