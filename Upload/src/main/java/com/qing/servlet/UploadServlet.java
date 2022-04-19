@@ -25,9 +25,6 @@ public class UploadServlet extends HttpServlet {
 //        System.out.println("username"+username);
         // 文件上传总地址
         String upPath = this.getServletContext().getRealPath("/upload");
-//        String Path = "C:\\Users\\hujingjing\\Desktop\\fileUpload";
-//        String upPath = Path + File.separator + "admin";
-        ;
         File uploadFile = new File(upPath);
         if (!uploadFile.exists()) {
             uploadFile.mkdirs();
