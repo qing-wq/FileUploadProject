@@ -24,7 +24,7 @@ public class UploadServlet extends HttpServlet {
 //        String username = request.getParameter("username");
 //        System.out.println("username"+username);
         // 文件上传总地址
-        String upPath = this.getServletContext().getRealPath("WEB-INF/upload");
+        String upPath = this.getServletContext().getRealPath("/upload");
 //        String Path = "C:\\Users\\hujingjing\\Desktop\\fileUpload";
 //        String upPath = Path + File.separator + "admin";
         ;
@@ -106,7 +106,7 @@ public class UploadServlet extends HttpServlet {
         while ((len = inputStream.read(buffer)) > 0) {
             out.write(buffer, 0, len);
         }
-        String htmlContent = out.toString().replace("WCS", "HJJ");
+        String htmlContent = out.toString().replaceAll(fileName+  ".assets/", "81.68.160.116:7070"+ fileName+  ".assets/");
 //        System.out.println("文件原内容为：" + out.toString());    // 输出乱码
 //        System.out.println("替换后的内容为："+htmlContent);       // 输出乱码
         if (htmlContent.trim().equals("")) {
