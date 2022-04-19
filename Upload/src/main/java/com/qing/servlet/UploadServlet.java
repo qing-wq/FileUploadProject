@@ -17,28 +17,31 @@ import java.util.stream.Collectors;
 @WebServlet("/upload.do")
 public class UploadServlet extends HttpServlet {
     String fileName = "";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-        String username = request.getParameter("username");
-        System.out.println("username"+username);
-        // ÎÄ¼şÉÏ´«×ÜµØÖ·
-        String Path = "C:\\Users\\hujingjing\\Desktop\\fileUpload";
-        String upPath = Path + File.separator + username;
+//
+//        String username = request.getParameter("username");
+//        System.out.println("username"+username);
+        // æ–‡ä»¶ä¸Šä¼ æ€»åœ°å€
+        String upPath = this.getServletContext().getRealPath("WEB-INF/upload");
+//        String Path = "C:\\Users\\hujingjing\\Desktop\\fileUpload";
+//        String upPath = Path + File.separator + "admin";
+        ;
         File uploadFile = new File(upPath);
         if (!uploadFile.exists()) {
             uploadFile.mkdirs();
         }
 
-        // multipartResolver:È«¾ÖµÄÎÄ¼şÉÏ´«´¦ÀíÆ÷,ÓÃÓÚÈ¡³öÎÄ¼şÊı¾İ
-        // CommonsMultipartResolver ÓÃÓÚ´¦ÀípostÇëÇó
+        // multipartResolver:å…¨å±€çš„æ–‡ä»¶ä¸Šä¼ å¤„ç†å™¨,ç”¨äºå–å‡ºæ–‡ä»¶æ•°æ®
+        // CommonsMultipartResolver ç”¨äºå¤„ç†postè¯·æ±‚
         MultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         MultipartHttpServletRequest multipartRequest = resolver.resolveMultipart(request);
 
-        // ´¦ÀíhtmlÎÄ¼ş
-        uploadHtml(multipartRequest,upPath);
+        // å¤„ç†htmlæ–‡ä»¶
+        uploadHtml(multipartRequest, upPath);
 
-        // ×¢Òâ£º.assetsÎÄ¼ş¼ĞÃûÊÇÓÉhtmlÎÄ¼şÃûÉú³ÉµÄ
+        // æ³¨æ„ï¼š.assetsæ–‡ä»¶å¤¹åæ˜¯ç”±htmlæ–‡ä»¶åç”Ÿæˆçš„
         String folderName = fileName.substring(0, fileName.lastIndexOf(".") + 1) + ".assets";
         String folderPath = upPath + File.separator + folderName;
         File uploadFolder = new File(folderPath);
@@ -46,13 +49,15 @@ public class UploadServlet extends HttpServlet {
             uploadFolder.mkdirs();
         }
 
-        // ´¦ÀíÎÄ¼ş¼Ğ
+        // å¤„ç†æ–‡ä»¶å¤¹
         if (fileName == null || fileName.trim().equals("")) {
-            System.out.println("htmlÎÄ¼şÃû³ö´í£¡");
+            System.out.println("htmlæ–‡ä»¶åå‡ºé”™ï¼");
             return;
         }
         uploadAssets(multipartRequest, folderPath);
-        request.getRequestDispatcher("/index.jsp").forward(request,response);
+        String mes = "æ–‡ä»¶ä¸Šä¼ æˆåŠŸ";
+        request.setAttribute("mes",mes);
+        request.getRequestDispatcher("/info.jsp").forward(request, response);
     }
 
 
@@ -62,11 +67,11 @@ public class UploadServlet extends HttpServlet {
             fileName = file.getOriginalFilename();
             System.out.println("HTML-filename:" + fileName);
         } else {
-            System.out.println("ÇëÏÈÉÏ´«htmlÎÄ¼ş");
+            System.out.println("è¯·å…ˆä¸Šä¼ htmlæ–‡ä»¶");
             return;
         }
         String filePath = upPath + File.separator + file.getOriginalFilename();
-        outPutFileStream(file,filePath);
+        outPutFileStream(file, filePath);
     }
 
     private void uploadAssets(MultipartHttpServletRequest multipartRequest, String folderPath) throws IOException {
@@ -74,21 +79,21 @@ public class UploadServlet extends HttpServlet {
         for (MultipartFile sonFile : fileFolder) {
             String sonFilename = sonFile.getOriginalFilename();
             String sonPath = folderPath + File.separator + sonFilename;
-            outPutFileStream(sonFile,sonPath);
+            outPutFileStream(sonFile, sonPath);
         }
     }
 
     private void outPutFileStream(MultipartFile file, String Path) throws IOException {
         InputStream inputStream = file.getInputStream();
-        // ÅĞ¶ÏÊÇ·ñÊÇhtmlÎÄ¼ş
+        // åˆ¤æ–­æ˜¯å¦æ˜¯htmlæ–‡ä»¶
         if (Path.substring(Path.lastIndexOf(".") + 1).equals("html")) {
             inputStream = replaceUrl(inputStream);
         }
         FileOutputStream outputStream = new FileOutputStream(Path);
         byte[] buffer = new byte[1024 * 1024];
-        int len =0;
+        int len = 0;
         while ((len = inputStream.read(buffer)) > 0) {
-            outputStream.write(buffer,0,len);
+            outputStream.write(buffer, 0, len);
         }
         outputStream.close();
         inputStream.close();
@@ -98,14 +103,14 @@ public class UploadServlet extends HttpServlet {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         int len = -1;
         byte[] buffer = new byte[1024 * 1024];
-        while ((len = inputStream.read(buffer))>0) {
-            out.write(buffer,0,len);
+        while ((len = inputStream.read(buffer)) > 0) {
+            out.write(buffer, 0, len);
         }
         String htmlContent = out.toString().replace("WCS", "HJJ");
-//        System.out.println("ÎÄ¼şÔ­ÄÚÈİÎª£º" + out.toString());    // Êä³öÂÒÂë
-//        System.out.println("Ìæ»»ºóµÄÄÚÈİÎª£º"+htmlContent);       // Êä³öÂÒÂë
+//        System.out.println("æ–‡ä»¶åŸå†…å®¹ä¸ºï¼š" + out.toString());    // è¾“å‡ºä¹±ç 
+//        System.out.println("æ›¿æ¢åçš„å†…å®¹ä¸ºï¼š"+htmlContent);       // è¾“å‡ºä¹±ç 
         if (htmlContent.trim().equals("")) {
-            System.out.println("ÎÄ±¾ÄÚÈİÎª¿Õ");
+            System.out.println("æ–‡æœ¬å†…å®¹ä¸ºç©º");
         }
         return new ByteArrayInputStream(out.toByteArray());
     }
