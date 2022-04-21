@@ -22,7 +22,7 @@ public class UserDao {
         String fileName = data.fileName;
 
         connection = jdbcUtil.getConnection();
-        String sql = "insert into `bank`(username,fileName,`time`) values(?,?,?)";
+        String sql = "insert into `file`(username,fileName,`time`) values(?,?,?)";
         preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,username);
         preparedStatement.setString(2,fileName);

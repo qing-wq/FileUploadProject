@@ -30,14 +30,13 @@ public class UploadServlet extends HttpServlet {
             uploadFile.mkdirs();
         }
 
-        // multipartResolver:全局的文件上传处理器,用于取出文件数据
+        // multipartResolver 全局的文件上传处理器
         MultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         MultipartHttpServletRequest multipartRequest = resolver.resolveMultipart(request);
 
-        // 处理html文件
         uploadHtml(multipartRequest, upPath);
 
-        // 注意：.assets文件夹名是由html文件名生成的
+        // 此处.assets文件夹名是由html文件名生成的
         String folderName = fileName.substring(0, fileName.lastIndexOf(".") + 1) + ".assets";
         String folderPath = upPath + File.separator + folderName;
         File uploadFolder = new File(folderPath);
@@ -56,14 +55,13 @@ public class UploadServlet extends HttpServlet {
         request.getRequestDispatcher("/info.jsp").forward(request, response);
     }
 
-
     private void uploadHtml(MultipartHttpServletRequest multipartRequest, String upPath) throws IOException {
         MultipartFile file = multipartRequest.getFile("file");
         if (file != null) {
             fileName = file.getOriginalFilename();
             System.out.println("HTML-filename:" + fileName);
         } else {
-            System.out.println("请先上传html文件");
+            System.out.println("html-File is null");
             return;
         }
         String filePath = upPath + File.separator + file.getOriginalFilename();
@@ -81,7 +79,6 @@ public class UploadServlet extends HttpServlet {
 
     private void outPutFileStream(MultipartFile file, String Path) throws IOException {
         InputStream inputStream = file.getInputStream();
-        // 判断是否是html文件
         if (Path.substring(Path.lastIndexOf(".") + 1).equals("html")) {
             inputStream = replaceUrl(inputStream);
         }
@@ -102,9 +99,9 @@ public class UploadServlet extends HttpServlet {
         while ((len = inputStream.read(buffer)) > 0) {
             out.write(buffer, 0, len);
         }
-        String htmlContent = out.toString().replaceAll(fileName+  ".assets/", ""+ fileName+  ".assets/");
-//        System.out.println("文件原内容为：" + out.toString());    // 输出乱码
-//        System.out.println("替换后的内容为："+htmlContent);       // 输出乱码
+        String htmlContent = out.toString().replaceAll(fileName+  ".assets/", "81.68.160.116:7070"+ fileName+  ".assets/");
+//        System.out.println("文件原内容为：" + out.toString());    // 乱码
+//        System.out.println("替换后的内容为："+htmlContent);       // 乱码
         if (htmlContent.trim().equals("")) {
             System.out.println("文本内容为空");
         }
