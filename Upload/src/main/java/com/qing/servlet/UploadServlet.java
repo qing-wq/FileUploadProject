@@ -31,7 +31,6 @@ public class UploadServlet extends HttpServlet {
         }
 
         // multipartResolver:全局的文件上传处理器,用于取出文件数据
-        // CommonsMultipartResolver 用于处理post请求
         MultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         MultipartHttpServletRequest multipartRequest = resolver.resolveMultipart(request);
 
@@ -103,7 +102,7 @@ public class UploadServlet extends HttpServlet {
         while ((len = inputStream.read(buffer)) > 0) {
             out.write(buffer, 0, len);
         }
-        String htmlContent = out.toString().replaceAll(fileName+  ".assets/", "81.68.160.116:7070"+ fileName+  ".assets/");
+        String htmlContent = out.toString().replaceAll(fileName+  ".assets/", ""+ fileName+  ".assets/");
 //        System.out.println("文件原内容为：" + out.toString());    // 输出乱码
 //        System.out.println("替换后的内容为："+htmlContent);       // 输出乱码
         if (htmlContent.trim().equals("")) {
