@@ -38,7 +38,7 @@ public class UploadServlet extends HttpServlet {
         uploadHtml(multipartRequest, upPath);
 
         // 此处.assets文件夹名是由html文件名生成的
-        String folderName = fileName.substring(0, fileName.lastIndexOf(".") + 1) + ".assets";
+        String folderName = fileName.substring(0, fileName.lastIndexOf(".")) + ".assets";
         String folderPath = upPath + File.separator + folderName;
         File uploadFolder = new File(folderPath);
         if (!uploadFolder.exists()) {
@@ -111,7 +111,8 @@ public class UploadServlet extends HttpServlet {
         while ((len = inputStream.read(buffer)) > 0) {
             out.write(buffer, 0, len);
         }
-        String htmlContent = out.toString().replaceAll(fileName+  ".assets/", "81.68.160.116:7070"+ fileName+  ".assets/");
+        // 错误代码
+        String htmlContent = out.toString().replaceAll(fileName+  ".assets/", "81.68.160.116:7070"+File.separator+ fileName+  ".assets/");
 //        System.out.println("文件原内容为：" + out.toString());    // 乱码
 //        System.out.println("替换后的内容为："+htmlContent);       // 乱码
         if (htmlContent.trim().equals("")) {
