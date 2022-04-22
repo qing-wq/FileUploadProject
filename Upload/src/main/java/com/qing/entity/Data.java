@@ -6,7 +6,15 @@ import java.util.Date;
 public class Data {
     public String fileName;
     public String username;
-    public Date date;
+    public String filePath;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
     public Data() {
     }

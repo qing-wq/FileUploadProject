@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>$Title$</title>
+    <title>FileUpload</title>
   </head>
   <body>
 <form action="${pageContext.request.contextPath}/upload.do" method="post" enctype="multipart/form-data">

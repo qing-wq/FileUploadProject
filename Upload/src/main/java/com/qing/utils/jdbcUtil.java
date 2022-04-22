@@ -14,7 +14,7 @@ public class jdbcUtil {
     static {
         try {
             // getResourceAsStream()可以dclasspath中的资源文件
-            InputStream in = jdbcUtil.class.getClassLoader().getResourceAsStream("db.Properties");
+            InputStream in = jdbcUtil.class.getClassLoader().getResourceAsStream("db.properties");
             Properties properties = new Properties();
             properties.load(in);    // 载入Properties文件
             driver = properties.getProperty("driver");

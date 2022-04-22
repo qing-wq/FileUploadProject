@@ -1,5 +1,8 @@
 package com.qing.servlet;
 
+import com.qing.entity.Data;
+import com.qing.entity.myFile;
+import com.qing.mapper.UserDao;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartResolver;
@@ -9,20 +12,18 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @WebServlet("/upload.do")
 public class UploadServlet extends HttpServlet {
     String fileName = "";
+    Data data;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-//
-//        String username = request.getParameter("username");
-//        System.out.println("username"+username);
+
+        data = new Data();
         // 文件上传总地址
         String upPath = this.getServletContext().getRealPath("/upload");
         File uploadFile = new File(upPath);
@@ -52,6 +53,15 @@ public class UploadServlet extends HttpServlet {
         uploadAssets(multipartRequest, folderPath);
         String mes = "文件上传成功";
         request.setAttribute("mes",mes);
+
+        UserDao userDao = new UserDao(data);
+        try {
+            List<myFile> list = userDao.save();
+            if (list.size() == 0) System.out.println("List is null");
+            else request.setAttribute("fileList",list);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         request.getRequestDispatcher("/info.jsp").forward(request, response);
     }
 
@@ -65,6 +75,8 @@ public class UploadServlet extends HttpServlet {
             return;
         }
         String filePath = upPath + File.separator + file.getOriginalFilename();
+        data.setFilePath(filePath);
+        data.setFileName(fileName);
         outPutFileStream(file, filePath);
     }
 
