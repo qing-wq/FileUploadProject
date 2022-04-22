@@ -1,2 +1,2 @@
-# FileUploadProject
-一个javaweb 文件上传小项目
+# FileUpload
+一个 javaweb 文件/文件夹上传小组件
