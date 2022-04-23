@@ -23,6 +23,7 @@ public class UploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+
         data = new Data();
         // 文件上传总地址
         String upPath = this.getServletContext().getRealPath("/upload");
