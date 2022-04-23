@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=GBK" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
   <head>
@@ -6,24 +6,24 @@
   </head>
   <body>
 <form action="${pageContext.request.contextPath}/upload.do" method="post" enctype="multipart/form-data">
-  <p>ÉÏ´«htmlÎÄ¼ş£º<input type="file" name="file" id="file" ></p>
-  <p>ÉÏ´«assetsÎÄ¼ş¼Ğ£º<input id="fileFolder" name="fileFolder" type="file"  webkitdirectory> </p>
-<%--  <p><input type="button" name="btn" id="btn" value="±£´æÊı¾İ"></p>--%>
-  <p><input type="submit" value="Ìá½»" id="submit"><input type="reset" value="ÖØÖÃ"></p>
+  <p>ä¸Šä¼ htmlæ–‡ä»¶ï¼š<input type="file" name="file" id="file" ></p>
+  <p>ä¸Šä¼ assetsæ–‡ä»¶å¤¹ï¼š<input id="fileFolder" name="fileFolder" type="file"  webkitdirectory> </p>
+<%--  <p><input type="button" name="btn" id="btn" value="ä¿å­˜æ•°æ®"></p>--%>
+  <p><input type="submit" value="æäº¤" id="submit"><input type="reset" value="é‡ç½®"></p>
 </form>
 <%--<div>--%>
-<%--  <p>ÓÃ»§Ãû£º<input type="text" name="username" id="username" placeholder="ÇëÌîĞ´ÓÃ»§Ãû"></p>--%>
-<%--  <p>ÉÏ´«htmlÎÄ¼ş£º<input type="file" name="file" id="file"/></p>--%>
-<%--  <p>ÉÏ´«assetsÎÄ¼ş¼Ğ£º<input id="fileFolder" name="fileFolder" type="file"  webkitdirectory>--%>
+<%--  <p>ç”¨æˆ·åï¼š<input type="text" name="username" id="username" placeholder="è¯·å¡«å†™ç”¨æˆ·å"></p>--%>
+<%--  <p>ä¸Šä¼ htmlæ–‡ä»¶ï¼š<input type="file" name="file" id="file"/></p>--%>
+<%--  <p>ä¸Šä¼ assetsæ–‡ä»¶å¤¹ï¼š<input id="fileFolder" name="fileFolder" type="file"  webkitdirectory>--%>
 <%--</div>--%>
 <%--<div>--%>
-<%--  <button id="mybtn">Ìá½»</button>--%>
+<%--  <button id="mybtn">æäº¤</button>--%>
 <%--</div>--%>
 <%--<div id="div">--%>
 <%--</div>--%>
 <%--<script src="https://code.jquery.com/jquery-3.4.1.js"></script>--%>
 <%--<script>--%>
-<%--  //»ñÈ¡Ò»¸öÉÏ´«ÎÄ¼şµÄÀ©Õ¹Ãû--%>
+<%--  //è·å–ä¸€ä¸ªä¸Šä¼ æ–‡ä»¶çš„æ‰©å±•å--%>
 <%--  var myfile = document.getElementById('file');--%>
 <%--  var mybtn = document.getElementById('btn');--%>
 <%--  var username = $("#username").val();--%>
@@ -35,9 +35,9 @@
 <%--      $('button').click(function () {--%>
 <%--        $.ajax({--%>
 <%--          url: "/FileUploadProject/upload.do",--%>
-<%--          //post·½·¨--%>
+<%--          //postæ–¹æ³•--%>
 <%--          method: "post",--%>
-<%--          //´«¹ıÈ¥µÄÊı¾İ--%>
+<%--          //ä¼ è¿‡å»çš„æ•°æ®--%>
 <%--          data:{--%>
 <%--            filename: JSON.stringify(myfile.files[0].name),--%>
 <%--            username: JSON.stringify(username),--%>
