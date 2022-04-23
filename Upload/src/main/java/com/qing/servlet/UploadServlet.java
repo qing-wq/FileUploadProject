@@ -112,8 +112,8 @@ public class UploadServlet extends HttpServlet {
             out.write(buffer, 0, len);
         }
         // 错误代码
+        String htmlContent = out.toString();
 //        System.out.println("文件原内容为：" + out.toString());    // 乱码
-//        System.out.println("替换后的内容为："+htmlContent);       // 乱码
         if (htmlContent.trim().equals("")) {
             System.out.println("文本内容为空");
         }
