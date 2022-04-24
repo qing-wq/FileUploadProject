@@ -13,7 +13,6 @@ public class jdbcUtil {
 
     static {
         try {
-            // getResourceAsStream()可以dclasspath中的资源文件
             InputStream in = jdbcUtil.class.getClassLoader().getResourceAsStream("db.properties");
             Properties properties = new Properties();
             properties.load(in);    // 载入Properties文件
@@ -21,7 +20,6 @@ public class jdbcUtil {
             url = properties.getProperty("url");
             username = properties.getProperty("username");
             password = properties.getProperty("password");
-            // 1.加载驱动
             Class.forName(driver);
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
