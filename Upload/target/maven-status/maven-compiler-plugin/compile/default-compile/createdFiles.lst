@@ -1,6 +1,6 @@
 com\qing\servlet\UploadServlet.class
 com\qing\entity\myFile.class
-com\qing\servlet\forward.class
+com\qing\servlet\EncodFilter.class
 com\qing\entity\Data.class
 com\qing\utils\jdbcUtil.class
 com\qing\mapper\UserDao.class
