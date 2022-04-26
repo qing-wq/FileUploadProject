@@ -6,4 +6,7 @@
     <insert id="saveFile" parameterType="com.qing.entity.MyFile">
         insert into bank.file(fileName, time, filePath,username) VALUE (#{fileName},#{time},#{filePath},#{username})
     </insert>
+    <select id="selectFile" resultType="com.qing.entity.MyFile" >
+        select * from file
+    </select>
 </mapper>
