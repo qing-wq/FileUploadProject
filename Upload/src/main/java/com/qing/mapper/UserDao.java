@@ -19,7 +19,7 @@ public class UserDao {
     public UserDao(Data data) {
         this.data = data;
     }
-
+    // 插入上传的文件
     public List<myFile> save() throws SQLException {
         List<myFile> list = new ArrayList<>();
         connection = jdbcUtil.getConnection();
