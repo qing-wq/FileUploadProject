@@ -1,12 +1,21 @@
 package com.qing.entity;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Data {
     public String fileName;
     public String username;
+    public Data time;
     public String filePath;
+
+
+    public Data() {
+    }
+
+    public Data(String fileName, String username, Date date) {
+        this.fileName = fileName;
+        this.username = username;
+    }
 
     public String getFilePath() {
         return filePath;
@@ -16,12 +25,12 @@ public class Data {
         this.filePath = filePath;
     }
 
-    public Data() {
+    public java.sql.Date getTime() {
+        return new java.sql.Date(new java.util.Date().getTime());
     }
 
-    public Data(String fileName, String username, Date date) {
-        this.fileName = fileName;
-        this.username = username;
+    public void setTime(Data time) {
+        this.time = time;
     }
 
     public String getFileName() {
