@@ -5,7 +5,6 @@ import com.qing.utils.MybatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
@@ -23,7 +22,8 @@ public class UserDao {
         if (n <= 0) {
             System.out.println("插入数据失败，请重试");
             sqlSession.close();
-            return null;
+        } else {
+            sqlSession.commit();
         }
         // 返回数据
         return mapper.selectFile();

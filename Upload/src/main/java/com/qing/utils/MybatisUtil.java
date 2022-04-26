@@ -25,6 +25,6 @@ public class MybatisUtil {
     // 获取sqlSession对象
     // sqlSession中完全包含了面向数据库执行sql命令所需的所有方法
     public static SqlSession getSqlSession() {
-        return sqlSessionFactory.openSession(true);
+        return sqlSessionFactory.openSession();
     }
 }
