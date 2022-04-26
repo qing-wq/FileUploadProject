@@ -1,31 +1,27 @@
 package com.qing.mapper;
 
-import com.qing.entity.Data;
-import com.qing.entity.myFile;
+import com.qing.entity.MyFile;
 import com.qing.utils.MybatisUtil;
-import com.qing.utils.jdbcUtil;
 import org.apache.ibatis.session.SqlSession;
 
-import java.nio.channels.Pipe;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
 
-    public Data data;
+    public MyFile myFile;
 //    public Connection connection = null;
 //    public PreparedStatement preparedStatement = null;
 //    public ResultSet resultSet = null;
 //
-    public UserDao(Data data) {
-        this.data = data;
+    public UserDao(MyFile myFile) {
+        this.myFile = myFile;
     }
 //    // 插入上传的文件
-    public List<myFile> save() throws SQLException {
+    public List<MyFile> save() throws SQLException {
         SqlSession sqlSession = MybatisUtil.getSqlSession();
         FileMapper mapper = sqlSession.getMapper(FileMapper.class);
-        mapper.saveFile()
+        mapper.saveFile(myFile);
 //        List<myFile> list = new ArrayList<>();
 //        connection = jdbcUtil.getConnection();
 //        String sql = "insert into `file`(fileName,`time`,filePath) values(?,?,?)";

@@ -1,7 +1,6 @@
 package com.qing.servlet;
 
-import com.qing.entity.Data;
-import com.qing.entity.myFile;
+import com.qing.entity.MyFile;
 import com.qing.mapper.UserDao;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -18,13 +17,13 @@ import java.util.List;
 @WebServlet("/upload.do")
 public class UploadServlet extends HttpServlet {
     String fileName = "";
-    Data data;
+    MyFile myFile;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 
-        data = new Data();
+        myFile = new MyFile();
         // 文件上传总地址
         String upPath = this.getServletContext().getRealPath("/upload");
         System.out.println(upPath);
@@ -55,9 +54,9 @@ public class UploadServlet extends HttpServlet {
         String mes = "文件上传成功";
         request.setAttribute("mes",mes);
 
-        UserDao userDao = new UserDao(data);
+        UserDao userDao = new UserDao(myFile);
         try {
-            List<myFile> list = userDao.save();
+            List<MyFile> list = userDao.save();
             if (list.size() == 0) System.out.println("List is null");
             else request.setAttribute("fileList",list);
         } catch (SQLException e) {
@@ -76,8 +75,8 @@ public class UploadServlet extends HttpServlet {
             return;
         }
         String filePath = upPath + File.separator + file.getOriginalFilename();
-        data.setFilePath(filePath);
-        data.setFileName(fileName);
+        myFile.setFilePath(filePath);
+        myFile.setFileName(fileName);
         outPutFileStream(file, filePath);
     }
 

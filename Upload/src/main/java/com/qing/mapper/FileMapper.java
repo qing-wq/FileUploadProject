@@ -1,10 +1,10 @@
 package com.qing.mapper;
 
-import com.qing.entity.myFile;
+import com.qing.entity.MyFile;
 
 import java.util.List;
 
 public interface FileMapper {
-    public Integer saveFile(myFile myfile);
-    public List<myFile> selectFile();
+    public Integer saveFile(MyFile myfile);
+    public List<MyFile> selectFile();
 }
