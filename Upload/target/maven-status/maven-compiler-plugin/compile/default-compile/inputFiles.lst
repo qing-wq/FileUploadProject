@@ -1,6 +1,7 @@
 D:\JavaProject\FileUploadProject\Upload\src\main\java\com\qing\servlet\UploadServlet.java
 D:\JavaProject\FileUploadProject\Upload\src\main\java\com\qing\utils\jdbcUtil.java
-D:\JavaProject\FileUploadProject\Upload\src\main\java\com\qing\entity\Data.java
+D:\JavaProject\FileUploadProject\Upload\src\main\java\com\qing\mapper\FileMapper.java
+D:\JavaProject\FileUploadProject\Upload\src\main\java\com\qing\utils\MybatisUtil.java
 D:\JavaProject\FileUploadProject\Upload\src\main\java\com\qing\servlet\EncodFilter.java
 D:\JavaProject\FileUploadProject\Upload\src\main\java\com\qing\mapper\UserDao.java
-D:\JavaProject\FileUploadProject\Upload\src\main\java\com\qing\entity\myFile.java
+D:\JavaProject\FileUploadProject\Upload\src\main\java\com\qing\entity\MyFile.java

@@ -1,6 +1,7 @@
+com\qing\utils\MybatisUtil.class
+com\qing\mapper\FileMapper.class
 com\qing\servlet\UploadServlet.class
-com\qing\entity\myFile.class
+com\qing\entity\MyFile.class
 com\qing\servlet\EncodFilter.class
-com\qing\entity\Data.class
 com\qing\utils\jdbcUtil.class
 com\qing\mapper\UserDao.class
