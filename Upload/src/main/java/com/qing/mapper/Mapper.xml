@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qing.mapper.FileMapper">
     <insert id="saveFile" parameterType="com.qing.entity.MyFile">
-        insert into bank.file(fileName, time, filePath,username) VALUE (#{fileName},#{time},#{filePath},#{username})
+        insert into bank.file(fileName, time, filePath) VALUE (#{fileName},#{time},#{filePath})
     </insert>
     <select id="selectFile" resultType="com.qing.entity.MyFile" >
         select * from file

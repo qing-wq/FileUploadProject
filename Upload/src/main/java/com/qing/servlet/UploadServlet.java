@@ -22,7 +22,6 @@ public class UploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-
         myFile = new MyFile();
         // 文件上传总地址
         String upPath = this.getServletContext().getRealPath("/upload");
@@ -53,7 +52,6 @@ public class UploadServlet extends HttpServlet {
         uploadAssets(multipartRequest, folderPath);
         String mes = "文件上传成功";
         request.setAttribute("mes",mes);
-
         UserDao userDao = new UserDao(myFile);
         try {
             List<MyFile> list = userDao.save();

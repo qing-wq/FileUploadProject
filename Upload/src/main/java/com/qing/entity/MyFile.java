@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class MyFile {
     public String fileName;
-    public String username;
     public java.sql.Date time;
     public String filePath;
 
@@ -12,9 +11,9 @@ public class MyFile {
     public MyFile() {
     }
 
-    public MyFile(String fileName, String username, Date date) {
+    public MyFile(String fileName, String filePath) {
         this.fileName = fileName;
-        this.username = username;
+        this.filePath = filePath;
     }
 
     public String getFilePath() {
@@ -39,14 +38,6 @@ public class MyFile {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
 }

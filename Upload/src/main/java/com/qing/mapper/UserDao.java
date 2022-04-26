@@ -16,7 +16,6 @@ public class UserDao {
     }
    // 插入上传的文件
     public List<MyFile> save() throws SQLException {
-        List<MyFile> list = new ArrayList<>();
         SqlSession sqlSession = MybatisUtil.getSqlSession();
         FileMapper mapper = sqlSession.getMapper(FileMapper.class);
         Integer n = mapper.saveFile(myFile);
