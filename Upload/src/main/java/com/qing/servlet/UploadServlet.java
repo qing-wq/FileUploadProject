@@ -27,6 +27,7 @@ public class UploadServlet extends HttpServlet {
         data = new Data();
         // 文件上传总地址
         String upPath = this.getServletContext().getRealPath("/upload");
+        System.out.println(upPath);
         File uploadFile = new File(upPath);
         if (!uploadFile.exists()) {
             uploadFile.mkdirs();
