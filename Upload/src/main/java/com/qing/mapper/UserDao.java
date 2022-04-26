@@ -5,6 +5,7 @@ import com.qing.utils.MybatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
@@ -19,10 +20,14 @@ public class UserDao {
     }
 //    // 插入上传的文件
     public List<MyFile> save() throws SQLException {
+        List<MyFile> list = new ArrayList<>();
         SqlSession sqlSession = MybatisUtil.getSqlSession();
         FileMapper mapper = sqlSession.getMapper(FileMapper.class);
-        mapper.saveFile(myFile);
-//        List<myFile> list = new ArrayList<>();
+        Integer n = mapper.saveFile(myFile);
+        System.out.println("受影响的行数为："+ n);
+        if (n < 0) {
+            System.out.println("插入数据失败，请重试");
+        }
 //        connection = jdbcUtil.getConnection();
 //        String sql = "insert into `file`(fileName,`time`,filePath) values(?,?,?)";
 //        preparedStatement = connection.prepareStatement(sql);
