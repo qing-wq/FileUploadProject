@@ -27,7 +27,6 @@ public class UploadServlet extends HttpServlet {
         myFile = new MyFile();
         // 文件上传总地址
         String upPath = this.getServletContext().getRealPath("/upload");
-        System.out.println(upPath);
         File uploadFile = new File(upPath);
         if (!uploadFile.exists()) {
             uploadFile.mkdirs();
@@ -73,9 +72,10 @@ public class UploadServlet extends HttpServlet {
         if (file != null) {
             fileName = file.getOriginalFilename();
             System.out.println("HTML-filename:" + fileName);
-            if (fileName.substring(fileName.lastIndexOf(".") + 1).equals("html")) {
+            if (!fileName.substring(fileName.lastIndexOf(".") + 1).equals("html")) {
+                System.out.println(fileName.substring(fileName.lastIndexOf(".") + 1));
                 System.out.println("Not HtmlFile");
-                mes = "请上传html文件";
+                mes = "请上传html文件!";
                 return;
             }
         } else {
@@ -99,9 +99,6 @@ public class UploadServlet extends HttpServlet {
 
     private void outPutFileStream(MultipartFile file, String Path) throws IOException {
         InputStream inputStream = file.getInputStream();
-        if (Path.substring(Path.lastIndexOf(".") + 1).equals("html")) {
-            inputStream = replaceUrl(inputStream);
-        }
         FileOutputStream outputStream = new FileOutputStream(Path);
         byte[] buffer = new byte[1024 * 1024];
         int len = 0;
@@ -110,20 +107,6 @@ public class UploadServlet extends HttpServlet {
         }
         outputStream.close();
         inputStream.close();
-    }
-
-    private InputStream replaceUrl(InputStream inputStream) throws IOException {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        int len = -1;
-        byte[] buffer = new byte[1024 * 1024];
-        while ((len = inputStream.read(buffer)) > 0) {
-            out.write(buffer, 0, len);
-        }
-        String htmlContent = out.toString().replace("wcs","hjj");
-        if (htmlContent.trim().equals("")) {
-            System.out.println("文本内容为空");
-        }
-        return new ByteArrayInputStream(htmlContent.getBytes(StandardCharsets.UTF_8));
     }
 
     @Override
