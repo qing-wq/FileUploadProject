@@ -1,7 +1,7 @@
 package com.qing.servlet;
 
 import com.qing.entity.MyFile;
-import com.qing.mapper.UserDao;
+import com.qing.service.UserDao;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartResolver;
@@ -11,6 +11,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class UploadServlet extends HttpServlet {
     String fileName = "";
     MyFile myFile;
+    String mes = "";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -35,13 +37,9 @@ public class UploadServlet extends HttpServlet {
         MultipartHttpServletRequest multipartRequest = resolver.resolveMultipart(request);
 
         uploadHtml(multipartRequest, upPath);
-
-        // 此处.assets文件夹名是由html文件名生成的
-        String folderName = fileName.substring(0, fileName.lastIndexOf(".")) + ".assets";
-        String folderPath = upPath + File.separator + folderName;
-        File uploadFolder = new File(folderPath);
-        if (!uploadFolder.exists()) {
-            uploadFolder.mkdirs();
+        if (!mes.equals("")) {
+            request.getRequestDispatcher("/info.jsp").forward(request, response);
+            return;
         }
 
         // 处理文件夹
@@ -49,8 +47,15 @@ public class UploadServlet extends HttpServlet {
             System.out.println("html文件名出错！");
             return;
         }
+        // 此处.assets文件夹名是由html文件名生成的
+        String folderName = fileName.substring(0, fileName.lastIndexOf(".")) + ".assets";
+        String folderPath = upPath + File.separator + folderName;
+        File uploadFolder = new File(folderPath);
+        if (!uploadFolder.exists()) {
+            uploadFolder.mkdirs();
+        }
         uploadAssets(multipartRequest, folderPath);
-        String mes = "文件上传成功";
+        mes = "文件上传成功";
         request.setAttribute("mes",mes);
         UserDao userDao = new UserDao(myFile);
         try {
@@ -68,6 +73,11 @@ public class UploadServlet extends HttpServlet {
         if (file != null) {
             fileName = file.getOriginalFilename();
             System.out.println("HTML-filename:" + fileName);
+            if (fileName.substring(fileName.lastIndexOf(".") + 1).equals("html")) {
+                System.out.println("Not HtmlFile");
+                mes = "请上传html文件";
+                return;
+            }
         } else {
             System.out.println("html-File is null");
             return;
@@ -109,11 +119,11 @@ public class UploadServlet extends HttpServlet {
         while ((len = inputStream.read(buffer)) > 0) {
             out.write(buffer, 0, len);
         }
-        String htmlContent = out.toString();
+        String htmlContent = out.toString().replace("wcs","hjj");
         if (htmlContent.trim().equals("")) {
             System.out.println("文本内容为空");
         }
-        return new ByteArrayInputStream(out.toByteArray());
+        return new ByteArrayInputStream(htmlContent.getBytes(StandardCharsets.UTF_8));
     }
 
     @Override

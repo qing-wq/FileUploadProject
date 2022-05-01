@@ -1,6 +1,7 @@
-package com.qing.mapper;
+package com.qing.service;
 
 import com.qing.entity.MyFile;
+import com.qing.mapper.FileMapper;
 import com.qing.utils.MybatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
