@@ -1,4 +1,4 @@
-package com.qing.servlet;
+package com.qing.controller;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
