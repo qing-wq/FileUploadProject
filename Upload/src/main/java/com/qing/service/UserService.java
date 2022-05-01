@@ -8,10 +8,10 @@ import org.apache.ibatis.session.SqlSession;
 import java.sql.*;
 import java.util.List;
 
-public class UserDao {
+public class UserService {
 
     public MyFile myFile;
-    public UserDao(MyFile myFile) {
+    public UserService(MyFile myFile) {
         this.myFile = myFile;
     }
    // 插入上传的文件

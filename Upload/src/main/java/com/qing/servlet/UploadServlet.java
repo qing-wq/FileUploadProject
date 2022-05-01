@@ -1,7 +1,7 @@
 package com.qing.servlet;
 
 import com.qing.entity.MyFile;
-import com.qing.service.UserDao;
+import com.qing.service.UserService;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartResolver;
@@ -57,9 +57,9 @@ public class UploadServlet extends HttpServlet {
         uploadAssets(multipartRequest, folderPath);
         mes = "文件上传成功";
         request.setAttribute("mes",mes);
-        UserDao userDao = new UserDao(myFile);
+        UserService userService = new UserService(myFile);
         try {
-            List<MyFile> list = userDao.save();
+            List<MyFile> list = userService.save();
             if (list.size() == 0) System.out.println("List is null");
             else request.setAttribute("fileList",list);
         } catch (SQLException e) {
