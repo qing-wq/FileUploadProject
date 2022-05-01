@@ -55,12 +55,12 @@ public class UploadServlet extends HttpServlet {
         }
         uploadAssets(multipartRequest, folderPath);
         mes = "文件上传成功";
-        request.setAttribute("mes",mes);
+        request.setAttribute("mes", mes);
         UserService userService = new UserService(myFile);
         try {
             List<MyFile> list = userService.save();
             if (list.size() == 0) System.out.println("List is null");
-            else request.setAttribute("fileList",list);
+            else request.setAttribute("fileList", list);
         } catch (SQLException e) {
             e.printStackTrace();
         }
